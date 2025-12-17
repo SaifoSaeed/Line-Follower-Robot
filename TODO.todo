@@ -1,0 +1,84 @@
+Project:
+    What's next?:
+        ☐ Understand CCP1/2.
+        ☐ How to utilize TMR1, TM2.
+        ☐ Soldering of critical jumpers.
+        ☐ Ultrasonic sensor -> ADC configuration.
+        ☐ 9V battery?
+        ☐ Glue breadboard/batteries/other stuff on car bed.
+        ☐ Set up (real_life) testing env.
+        ☐ What if obstacle?!
+        ☐ Understand Bump and Parking...
+        ☐ Tweaking...
+
+    In Embedded Lab:
+        ✔ Figure out board PSU. @done (12/17/2025, 6:39:27 PM)
+        ✔ MOSFETs @done (12/17/2025, 6:39:27 PM)
+        ✔ Transistors @done (12/17/2025, 6:39:04 PM)
+        ✔ Another line follower! @done (12/17/2025, 6:39:24 PM)
+        ✔ How to work the yellow button? @done (12/4/2025, 8:38:30 PM)
+        Ultrasonic:
+            ☐ If the ultrasonic sensor has a 30deg angle, what does it read?
+            ☐ Ranged up or down?
+            ☐ How high is the bump? How long? Are we expected to slow down or speed up?
+        ☐ Where is the flag when we park?
+    Power On:
+        ☐ Check MCLR
+        ☐ Oscillator working?
+        ☐ Power connections.
+        ☐ Watchdog timer!
+    
+    Components:
+            ✔ Database. @done (12/4/2025, 7:18:07 PM)
+            ✔ How to power?! @done (12/17/2025, 6:39:54 PM)
+            ✔ Identify Component Connections. @done (12/17/2025, 6:39:56 PM)
+            ✘ Schematic (draw.io) @cancelled (12/17/2025, 6:39:57 PM)
+     Code:
+        ☐ Trace path. 
+        ☐ Flowchart.
+        
+    Special Register Config:
+        ✔ TRISs @done (12/17/2025, 6:40:04 PM)
+        ☐ STATUS
+        ☐ INTCONs
+        ☐ IN/OUT
+    
+    ☐ Divide code among us!
+    ☐ Test.
+
+PSEUDO:
+    1. Power & Start.
+    2. Check line & Distance:
+
+        if (sensor1) { //follow line!
+            if (distance >= 50cm) {
+                motor_speed = max;
+            }
+            else {
+                motor_speed = (max * fraction?) //Above certain min speed
+            }
+        
+            if (sensor0 & sensor1 & sensor2) { 
+            motor_speed = 0
+            
+            //move 1cm forward
+
+            if (~sensor0 & ~sensor1 & ~sensor2) { //check 180 degrees}
+
+            if (sensor0 & sensor1 & sensor2) {// parking}
+            
+        }
+        }
+        else {
+            //the 3-sensors will be directly zero so depend on ultrasonic
+        }
+        
+
+        //TBC
+
+Experimental:
+    How much to 
+
+
+
+   

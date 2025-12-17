@@ -8,61 +8,61 @@
 //
 // Register addresses.
 //
-#define INDF_ADDR        0x0000
-#define TMR0_ADDR        0x0001
-#define PCL_ADDR        0x0002
-#define STATUS_ADDR        0x0003
-#define FSR_ADDR        0x0004
-#define PORTA_ADDR        0x0005
-#define PORTB_ADDR        0x0006
-#define PORTC_ADDR        0x0007
-#define PORTD_ADDR        0x0008
-#define PORTE_ADDR        0x0009
-#define PCLATH_ADDR        0x000A
-#define INTCON_ADDR        0x000B
-#define PIR1_ADDR        0x000C
-#define PIR2_ADDR        0x000D
-#define TMR1L_ADDR        0x000E
-#define TMR1H_ADDR        0x000F
-#define T1CON_ADDR        0x0010
-#define TMR2_ADDR        0x0011
-#define T2CON_ADDR        0x0012
-#define SSPBUF_ADDR        0x0013
-#define SSPCON_ADDR        0x0014
-#define CCPR1L_ADDR        0x0015
-#define CCPR1H_ADDR        0x0016
-#define CCP1CON_ADDR        0x0017
-#define RCSTA_ADDR        0x0018
-#define TXREG_ADDR        0x0019
-#define RCREG_ADDR        0x001A
-#define CCPR2L_ADDR        0x001B
-#define CCPR2H_ADDR        0x001C
-#define CCP2CON_ADDR        0x001D
-#define ADRESH_ADDR        0x001E
-#define ADCON0_ADDR        0x001F
-#define OPTION_REG_ADDR        0x0081
-#define TRISA_ADDR        0x0085
-#define TRISB_ADDR        0x0086
-#define TRISC_ADDR        0x0087
-#define TRISD_ADDR        0x0088
-#define TRISE_ADDR        0x0089
-#define PIE1_ADDR        0x008C
-#define PIE2_ADDR        0x008D
-#define PCON_ADDR        0x008E
-#define SSPCON2_ADDR        0x0091
-#define PR2_ADDR        0x0092
-#define SSPADD_ADDR        0x0093
-#define SSPSTAT_ADDR        0x0094
-#define TXSTA_ADDR        0x0098
-#define SPBRG_ADDR        0x0099
-#define ADRESL_ADDR        0x009E
-#define ADCON1_ADDR        0x009F
-#define EEDATA_ADDR        0x010C
-#define EEADR_ADDR        0x010D
-#define EEDATH_ADDR        0x010E
-#define EEADRH_ADDR        0x010F
-#define EECON1_ADDR        0x018C
-#define EECON2_ADDR        0x018D
+#define INDF        0x0000
+#define TMR0        0x0001
+#define PCL        0x0002
+#define STATUS        0x0003
+#define FSR        0x0004
+#define PORTA        0x0005
+#define PORTB        0x0006
+#define PORTC        0x0007
+#define PORTD        0x0008
+#define PORTE        0x0009
+#define PCLATH        0x000A
+#define INTCON        0x000B
+#define PIR1        0x000C
+#define PIR2        0x000D
+#define TMR1L        0x000E
+#define TMR1H        0x000F
+#define T1CON        0x0010
+#define TMR2        0x0011
+#define T2CON        0x0012
+#define SSPBUF        0x0013
+#define SSPCON        0x0014
+#define CCPR1L        0x0015
+#define CCPR1H        0x0016
+#define CCP1CON        0x0017
+#define RCSTA        0x0018
+#define TXREG        0x0019
+#define RCREG        0x001A
+#define CCPR2L        0x001B
+#define CCPR2H        0x001C
+#define CCP2CON        0x001D
+#define ADRESH        0x001E
+#define ADCON0        0x001F
+#define OPTION_REG        0x0081
+#define TRISA        0x0085
+#define TRISB        0x0086
+#define TRISC        0x0087
+#define TRISD        0x0088
+#define TRISE        0x0089
+#define PIE1        0x008C
+#define PIE2        0x008D
+#define PCON        0x008E
+#define SSPCON2        0x0091
+#define PR2        0x0092
+#define SSPADD        0x0093
+#define SSPSTAT        0x0094
+#define TXSTA        0x0098
+#define SPBRG        0x0099
+#define ADRESL        0x009E
+#define ADCON1        0x009F
+#define EEDATA        0x010C
+#define EEADR        0x010D
+#define EEDATH        0x010E
+#define EEADRH        0x010F
+#define EECON1        0x018C
+#define EECON2        0x018D
 
 //
 // Memory organization.
@@ -75,61 +75,61 @@
 #pragma memmap 0x0110 0x016f RAM 0x000
 #pragma memmap 0x0190 0x01ef RAM 0x000
 
-#pragma memmap INDF_ADDR INDF_ADDR SFR 0x000        // INDF
-#pragma memmap TMR0_ADDR TMR0_ADDR SFR 0x000        // TMR0
-#pragma memmap PCL_ADDR PCL_ADDR SFR 0x000        // PCL
-#pragma memmap STATUS_ADDR STATUS_ADDR SFR 0x000        // STATUS
-#pragma memmap FSR_ADDR FSR_ADDR SFR 0x000        // FSR
-#pragma memmap PORTA_ADDR PORTA_ADDR SFR 0x000        // PORTA
-#pragma memmap PORTB_ADDR PORTB_ADDR SFR 0x000        // PORTB
-#pragma memmap PORTC_ADDR PORTC_ADDR SFR 0x000        // PORTC
-#pragma memmap PORTD_ADDR PORTD_ADDR SFR 0x000        // PORTD
-#pragma memmap PORTE_ADDR PORTE_ADDR SFR 0x000        // PORTE
-#pragma memmap PCLATH_ADDR PCLATH_ADDR SFR 0x000        // PCLATH
-#pragma memmap INTCON_ADDR INTCON_ADDR SFR 0x000        // INTCON
-#pragma memmap PIR1_ADDR PIR1_ADDR SFR 0x000        // PIR1
-#pragma memmap PIR2_ADDR PIR2_ADDR SFR 0x000        // PIR2
-#pragma memmap TMR1L_ADDR TMR1L_ADDR SFR 0x000        // TMR1L
-#pragma memmap TMR1H_ADDR TMR1H_ADDR SFR 0x000        // TMR1H
-#pragma memmap T1CON_ADDR T1CON_ADDR SFR 0x000        // T1CON
-#pragma memmap TMR2_ADDR TMR2_ADDR SFR 0x000        // TMR2
-#pragma memmap T2CON_ADDR T2CON_ADDR SFR 0x000        // T2CON
-#pragma memmap SSPBUF_ADDR SSPBUF_ADDR SFR 0x000        // SSPBUF
-#pragma memmap SSPCON_ADDR SSPCON_ADDR SFR 0x000        // SSPCON
-#pragma memmap CCPR1L_ADDR CCPR1L_ADDR SFR 0x000        // CCPR1L
-#pragma memmap CCPR1H_ADDR CCPR1H_ADDR SFR 0x000        // CCPR1H
-#pragma memmap CCP1CON_ADDR CCP1CON_ADDR SFR 0x000        // CCP1CON
-#pragma memmap RCSTA_ADDR RCSTA_ADDR SFR 0x000        // RCSTA
-#pragma memmap TXREG_ADDR TXREG_ADDR SFR 0x000        // TXREG
-#pragma memmap RCREG_ADDR RCREG_ADDR SFR 0x000        // RCREG
-#pragma memmap CCPR2L_ADDR CCPR2L_ADDR SFR 0x000        // CCPR2L
-#pragma memmap CCPR2H_ADDR CCPR2H_ADDR SFR 0x000        // CCPR2H
-#pragma memmap CCP2CON_ADDR CCP2CON_ADDR SFR 0x000        // CCP2CON
-#pragma memmap ADRESH_ADDR ADRESH_ADDR SFR 0x000        // ADRESH
-#pragma memmap ADCON0_ADDR ADCON0_ADDR SFR 0x000        // ADCON0
-#pragma memmap OPTION_REG_ADDR OPTION_REG_ADDR SFR 0x000        // OPTION_REG
-#pragma memmap TRISA_ADDR TRISA_ADDR SFR 0x000        // TRISA
-#pragma memmap TRISB_ADDR TRISB_ADDR SFR 0x000        // TRISB
-#pragma memmap TRISC_ADDR TRISC_ADDR SFR 0x000        // TRISC
-#pragma memmap TRISD_ADDR TRISD_ADDR SFR 0x000        // TRISD
-#pragma memmap TRISE_ADDR TRISE_ADDR SFR 0x000        // TRISE
-#pragma memmap PIE1_ADDR PIE1_ADDR SFR 0x000        // PIE1
-#pragma memmap PIE2_ADDR PIE2_ADDR SFR 0x000        // PIE2
-#pragma memmap PCON_ADDR PCON_ADDR SFR 0x000        // PCON
-#pragma memmap SSPCON2_ADDR SSPCON2_ADDR SFR 0x000        // SSPCON2
-#pragma memmap PR2_ADDR PR2_ADDR SFR 0x000        // PR2
-#pragma memmap SSPADD_ADDR SSPADD_ADDR SFR 0x000        // SSPADD
-#pragma memmap SSPSTAT_ADDR SSPSTAT_ADDR SFR 0x000        // SSPSTAT
-#pragma memmap TXSTA_ADDR TXSTA_ADDR SFR 0x000        // TXSTA
-#pragma memmap SPBRG_ADDR SPBRG_ADDR SFR 0x000        // SPBRG
-#pragma memmap ADRESL_ADDR ADRESL_ADDR SFR 0x000        // ADRESL
-#pragma memmap ADCON1_ADDR ADCON1_ADDR SFR 0x000        // ADCON1
-#pragma memmap EEDATA_ADDR EEDATA_ADDR SFR 0x000        // EEDATA
-#pragma memmap EEADR_ADDR EEADR_ADDR SFR 0x000        // EEADR
-#pragma memmap EEDATH_ADDR EEDATH_ADDR SFR 0x000        // EEDATH
-#pragma memmap EEADRH_ADDR EEADRH_ADDR SFR 0x000        // EEADRH
-#pragma memmap EECON1_ADDR EECON1_ADDR SFR 0x000        // EECON1
-#pragma memmap EECON2_ADDR EECON2_ADDR SFR 0x000        // EECON2
+#pragma memmap INDF INDF SFR 0x000        // INDF
+#pragma memmap TMR0 TMR0 SFR 0x000        // TMR0
+#pragma memmap PCL PCL SFR 0x000        // PCL
+#pragma memmap STATUS STATUS SFR 0x000        // STATUS
+#pragma memmap FSR FSR SFR 0x000        // FSR
+#pragma memmap PORTA PORTA SFR 0x000        // PORTA
+#pragma memmap PORTB PORTB SFR 0x000        // PORTB
+#pragma memmap PORTC PORTC SFR 0x000        // PORTC
+#pragma memmap PORTD PORTD SFR 0x000        // PORTD
+#pragma memmap PORTE PORTE SFR 0x000        // PORTE
+#pragma memmap PCLATH PCLATH SFR 0x000        // PCLATH
+#pragma memmap INTCON INTCON SFR 0x000        // INTCON
+#pragma memmap PIR1 PIR1 SFR 0x000        // PIR1
+#pragma memmap PIR2 PIR2 SFR 0x000        // PIR2
+#pragma memmap TMR1L TMR1L SFR 0x000        // TMR1L
+#pragma memmap TMR1H TMR1H SFR 0x000        // TMR1H
+#pragma memmap T1CON T1CON SFR 0x000        // T1CON
+#pragma memmap TMR2 TMR2 SFR 0x000        // TMR2
+#pragma memmap T2CON T2CON SFR 0x000        // T2CON
+#pragma memmap SSPBUF SSPBUF SFR 0x000        // SSPBUF
+#pragma memmap SSPCON SSPCON SFR 0x000        // SSPCON
+#pragma memmap CCPR1L CCPR1L SFR 0x000        // CCPR1L
+#pragma memmap CCPR1H CCPR1H SFR 0x000        // CCPR1H
+#pragma memmap CCP1CON CCP1CON SFR 0x000        // CCP1CON
+#pragma memmap RCSTA RCSTA SFR 0x000        // RCSTA
+#pragma memmap TXREG TXREG SFR 0x000        // TXREG
+#pragma memmap RCREG RCREG SFR 0x000        // RCREG
+#pragma memmap CCPR2L CCPR2L SFR 0x000        // CCPR2L
+#pragma memmap CCPR2H CCPR2H SFR 0x000        // CCPR2H
+#pragma memmap CCP2CON CCP2CON SFR 0x000        // CCP2CON
+#pragma memmap ADRESH ADRESH SFR 0x000        // ADRESH
+#pragma memmap ADCON0 ADCON0 SFR 0x000        // ADCON0
+#pragma memmap OPTION_REG OPTION_REG SFR 0x000        // OPTION_REG
+#pragma memmap TRISA TRISA SFR 0x000        // TRISA
+#pragma memmap TRISB TRISB SFR 0x000        // TRISB
+#pragma memmap TRISC TRISC SFR 0x000        // TRISC
+#pragma memmap TRISD TRISD SFR 0x000        // TRISD
+#pragma memmap TRISE TRISE SFR 0x000        // TRISE
+#pragma memmap PIE1 PIE1 SFR 0x000        // PIE1
+#pragma memmap PIE2 PIE2 SFR 0x000        // PIE2
+#pragma memmap PCON PCON SFR 0x000        // PCON
+#pragma memmap SSPCON2 SSPCON2 SFR 0x000        // SSPCON2
+#pragma memmap PR2 PR2 SFR 0x000        // PR2
+#pragma memmap SSPADD SSPADD SFR 0x000        // SSPADD
+#pragma memmap SSPSTAT SSPSTAT SFR 0x000        // SSPSTAT
+#pragma memmap TXSTA TXSTA SFR 0x000        // TXSTA
+#pragma memmap SPBRG SPBRG SFR 0x000        // SPBRG
+#pragma memmap ADRESL ADRESL SFR 0x000        // ADRESL
+#pragma memmap ADCON1 ADCON1 SFR 0x000        // ADCON1
+#pragma memmap EEDATA EEDATA SFR 0x000        // EEDATA
+#pragma memmap EEADR EEADR SFR 0x000        // EEADR
+#pragma memmap EEDATH EEDATH SFR 0x000        // EEDATH
+#pragma memmap EEADRH EEADRH SFR 0x000        // EEADRH
+#pragma memmap EECON1 EECON1 SFR 0x000        // EECON1
+#pragma memmap EECON2 EECON2 SFR 0x000        // EECON2
 
 
 //         LIST
@@ -183,226 +183,226 @@
 //----- Register Files------------------------------------------------------
 //----- STATUS Bits --------------------------------------------------------
 
-// BIT_AT(STATUS_ADDR,7)        IRP;
-// BIT_AT(STATUS_ADDR,6)        RP1;
-// BIT_AT(STATUS_ADDR,5)        RP0;
-// BIT_AT(STATUS_ADDR,4)        NOT_TO;
-// BIT_AT(STATUS_ADDR,3)        NOT_PD;
-// BIT_AT(STATUS_ADDR,2)        Z;
-// BIT_AT(STATUS_ADDR,1)        DC;
-// BIT_AT(STATUS_ADDR,0)        C;
+// BIT_AT(STATUS,7)        IRP;
+// BIT_AT(STATUS,6)        RP1;
+// BIT_AT(STATUS,5)        RP0;
+// BIT_AT(STATUS,4)        NOT_TO;
+// BIT_AT(STATUS,3)        NOT_PD;
+// BIT_AT(STATUS,2)        Z;
+// BIT_AT(STATUS,1)        DC;
+// BIT_AT(STATUS,0)        C;
 
 // //----- INTCON Bits --------------------------------------------------------
 
-// BIT_AT(INTCON_ADDR,7)        GIE;
-// BIT_AT(INTCON_ADDR,6)        PEIE;
-// BIT_AT(INTCON_ADDR,5)        T0IE;
-// BIT_AT(INTCON_ADDR,4)        INTE;
-// BIT_AT(INTCON_ADDR,3)        RBIE;
-// BIT_AT(INTCON_ADDR,2)        T0IF;
-// BIT_AT(INTCON_ADDR,1)        INTF;
-// BIT_AT(INTCON_ADDR,0)        RBIF;
+// BIT_AT(INTCON,7)        GIE;
+// BIT_AT(INTCON,6)        PEIE;
+// BIT_AT(INTCON,5)        T0IE;
+// BIT_AT(INTCON,4)        INTE;
+// BIT_AT(INTCON,3)        RBIE;
+// BIT_AT(INTCON,2)        T0IF;
+// BIT_AT(INTCON,1)        INTF;
+// BIT_AT(INTCON,0)        RBIF;
 
 // //----- PIR1 Bits ----------------------------------------------------------
 
-// BIT_AT(PIR1_ADDR,7)        PSPIF;
-// BIT_AT(PIR1_ADDR,6)        ADIF;
-// BIT_AT(PIR1_ADDR,5)        RCIF;
-// BIT_AT(PIR1_ADDR,4)        TXIF;
-// BIT_AT(PIR1_ADDR,3)        SSPIF;
-// BIT_AT(PIR1_ADDR,2)        CCP1IF;
-// BIT_AT(PIR1_ADDR,1)        TMR2IF;
-// BIT_AT(PIR1_ADDR,0)        TMR1IF;
+// BIT_AT(PIR1,7)        PSPIF;
+// BIT_AT(PIR1,6)        ADIF;
+// BIT_AT(PIR1,5)        RCIF;
+// BIT_AT(PIR1,4)        TXIF;
+// BIT_AT(PIR1,3)        SSPIF;
+// BIT_AT(PIR1,2)        CCP1IF;
+// BIT_AT(PIR1,1)        TMR2IF;
+// BIT_AT(PIR1,0)        TMR1IF;
 
 // //----- PIR2 Bits ----------------------------------------------------------
 
-// BIT_AT(PIR2_ADDR,4)        EEIF;
-// BIT_AT(PIR2_ADDR,3)        BCLIF;
-// BIT_AT(PIR2_ADDR,0)        CCP2IF;
+// BIT_AT(PIR2,4)        EEIF;
+// BIT_AT(PIR2,3)        BCLIF;
+// BIT_AT(PIR2,0)        CCP2IF;
 
 // //----- T1CON Bits ---------------------------------------------------------
 
-// BIT_AT(T1CON_ADDR,5)        T1CKPS1;
-// BIT_AT(T1CON_ADDR,4)        T1CKPS0;
-// BIT_AT(T1CON_ADDR,3)        T1OSCEN;
-// BIT_AT(T1CON_ADDR,2)        NOT_T1SYNC;
-// BIT_AT(T1CON_ADDR,2)        T1INSYNC;    // Backward compatibility only
-// BIT_AT(T1CON_ADDR,2)        T1SYNC;
-// BIT_AT(T1CON_ADDR,1)        TMR1CS;
-// BIT_AT(T1CON_ADDR,0)        TMR1ON;
+// BIT_AT(T1CON,5)        T1CKPS1;
+// BIT_AT(T1CON,4)        T1CKPS0;
+// BIT_AT(T1CON,3)        T1OSCEN;
+// BIT_AT(T1CON,2)        NOT_T1SYNC;
+// BIT_AT(T1CON,2)        T1INSYNC;    // Backward compatibility only
+// BIT_AT(T1CON,2)        T1SYNC;
+// BIT_AT(T1CON,1)        TMR1CS;
+// BIT_AT(T1CON,0)        TMR1ON;
 
 // //----- T2CON Bits ---------------------------------------------------------
 
-// BIT_AT(T2CON_ADDR,6)        TOUTPS3;
-// BIT_AT(T2CON_ADDR,5)        TOUTPS2;
-// BIT_AT(T2CON_ADDR,4)        TOUTPS1;
-// BIT_AT(T2CON_ADDR,3)        TOUTPS0;
-// BIT_AT(T2CON_ADDR,2)        TMR2ON;
-// BIT_AT(T2CON_ADDR,1)        T2CKPS1;
-// BIT_AT(T2CON_ADDR,0)        T2CKPS0;
+// BIT_AT(T2CON,6)        TOUTPS3;
+// BIT_AT(T2CON,5)        TOUTPS2;
+// BIT_AT(T2CON,4)        TOUTPS1;
+// BIT_AT(T2CON,3)        TOUTPS0;
+// BIT_AT(T2CON,2)        TMR2ON;
+// BIT_AT(T2CON,1)        T2CKPS1;
+// BIT_AT(T2CON,0)        T2CKPS0;
 
 // //----- SSPCON Bits --------------------------------------------------------
 
-// BIT_AT(SSPCON_ADDR,7)        WCOL;
-// BIT_AT(SSPCON_ADDR,6)        SSPOV;
-// BIT_AT(SSPCON_ADDR,5)        SSPEN;
-// BIT_AT(SSPCON_ADDR,4)        CKP;
-// BIT_AT(SSPCON_ADDR,3)        SSPM3;
-// BIT_AT(SSPCON_ADDR,2)        SSPM2;
-// BIT_AT(SSPCON_ADDR,1)        SSPM1;
-// BIT_AT(SSPCON_ADDR,0)        SSPM0;
+// BIT_AT(SSPCON,7)        WCOL;
+// BIT_AT(SSPCON,6)        SSPOV;
+// BIT_AT(SSPCON,5)        SSPEN;
+// BIT_AT(SSPCON,4)        CKP;
+// BIT_AT(SSPCON,3)        SSPM3;
+// BIT_AT(SSPCON,2)        SSPM2;
+// BIT_AT(SSPCON,1)        SSPM1;
+// BIT_AT(SSPCON,0)        SSPM0;
 
 // //----- CCP1CON Bits -------------------------------------------------------
 
-// BIT_AT(CCP1CON_ADDR,5)        CCP1X;
-// BIT_AT(CCP1CON_ADDR,4)        CCP1Y;
-// BIT_AT(CCP1CON_ADDR,3)        CCP1M3;
-// BIT_AT(CCP1CON_ADDR,2)        CCP1M2;
-// BIT_AT(CCP1CON_ADDR,1)        CCP1M1;
-// BIT_AT(CCP1CON_ADDR,0)        CCP1M0;
+// BIT_AT(CCP1CON,5)        CCP1X;
+// BIT_AT(CCP1CON,4)        CCP1Y;
+// BIT_AT(CCP1CON,3)        CCP1M3;
+// BIT_AT(CCP1CON,2)        CCP1M2;
+// BIT_AT(CCP1CON,1)        CCP1M1;
+// BIT_AT(CCP1CON,0)        CCP1M0;
 
 // //----- RCSTA Bits ---------------------------------------------------------
 
-// BIT_AT(RCSTA_ADDR,7)        SPEN;
-// BIT_AT(RCSTA_ADDR,6)        RX9;
-// BIT_AT(RCSTA_ADDR,6)        RC9;    // Backward compatibility only
-// BIT_AT(RCSTA_ADDR,6)        NOT_RC8;    // Backward compatibility only
-// BIT_AT(RCSTA_ADDR,6)        RC8_9;    // Backward compatibility only
-// BIT_AT(RCSTA_ADDR,5)        SREN;
-// BIT_AT(RCSTA_ADDR,4)        CREN;
-// BIT_AT(RCSTA_ADDR,3)        ADDEN;
-// BIT_AT(RCSTA_ADDR,2)        FERR;
-// BIT_AT(RCSTA_ADDR,1)        OERR;
-// BIT_AT(RCSTA_ADDR,0)        RX9D;
-// BIT_AT(RCSTA_ADDR,0)        RCD8;    // Backward compatibility only
+// BIT_AT(RCSTA,7)        SPEN;
+// BIT_AT(RCSTA,6)        RX9;
+// BIT_AT(RCSTA,6)        RC9;    // Backward compatibility only
+// BIT_AT(RCSTA,6)        NOT_RC8;    // Backward compatibility only
+// BIT_AT(RCSTA,6)        RC8_9;    // Backward compatibility only
+// BIT_AT(RCSTA,5)        SREN;
+// BIT_AT(RCSTA,4)        CREN;
+// BIT_AT(RCSTA,3)        ADDEN;
+// BIT_AT(RCSTA,2)        FERR;
+// BIT_AT(RCSTA,1)        OERR;
+// BIT_AT(RCSTA,0)        RX9D;
+// BIT_AT(RCSTA,0)        RCD8;    // Backward compatibility only
 
 // //----- CCP2CON Bits -------------------------------------------------------
 
-// BIT_AT(CCP2CON_ADDR,5)        CCP2X;
-// BIT_AT(CCP2CON_ADDR,4)        CCP2Y;
-// BIT_AT(CCP2CON_ADDR,3)        CCP2M3;
-// BIT_AT(CCP2CON_ADDR,2)        CCP2M2;
-// BIT_AT(CCP2CON_ADDR,1)        CCP2M1;
-// BIT_AT(CCP2CON_ADDR,0)        CCP2M0;
+// BIT_AT(CCP2CON,5)        CCP2X;
+// BIT_AT(CCP2CON,4)        CCP2Y;
+// BIT_AT(CCP2CON,3)        CCP2M3;
+// BIT_AT(CCP2CON,2)        CCP2M2;
+// BIT_AT(CCP2CON,1)        CCP2M1;
+// BIT_AT(CCP2CON,0)        CCP2M0;
 
 // //----- ADCON0 Bits --------------------------------------------------------
 
-// BIT_AT(ADCON0_ADDR,7)        ADCS1;
-// BIT_AT(ADCON0_ADDR,6)        ADCS0;
-// BIT_AT(ADCON0_ADDR,5)        CHS2;
-// BIT_AT(ADCON0_ADDR,4)        CHS1;
-// BIT_AT(ADCON0_ADDR,3)        CHS0;
-// BIT_AT(ADCON0_ADDR,2)        GO;
-// BIT_AT(ADCON0_ADDR,2)        NOT_DONE;
-// BIT_AT(ADCON0_ADDR,2)        GO_DONE;
-// BIT_AT(ADCON0_ADDR,0)        ADON;
+// BIT_AT(ADCON0,7)        ADCS1;
+// BIT_AT(ADCON0,6)        ADCS0;
+// BIT_AT(ADCON0,5)        CHS2;
+// BIT_AT(ADCON0,4)        CHS1;
+// BIT_AT(ADCON0,3)        CHS0;
+// BIT_AT(ADCON0,2)        GO;
+// BIT_AT(ADCON0,2)        NOT_DONE;
+// BIT_AT(ADCON0,2)        GO_DONE;
+// BIT_AT(ADCON0,0)        ADON;
 
 // //----- OPTION_REG Bits -----------------------------------------------------
 
-// BIT_AT(OPTION_REG_ADDR,7)        NOT_RBPU;
-// BIT_AT(OPTION_REG_ADDR,6)        INTEDG;
-// BIT_AT(OPTION_REG_ADDR,5)        T0CS;
-// BIT_AT(OPTION_REG_ADDR,4)        T0SE;
-// BIT_AT(OPTION_REG_ADDR,3)        PSA;
-// BIT_AT(OPTION_REG_ADDR,2)        PS2;
-// BIT_AT(OPTION_REG_ADDR,1)        PS1;
-// BIT_AT(OPTION_REG_ADDR,0)        PS0;
+// BIT_AT(OPTION_REG,7)        NOT_RBPU;
+// BIT_AT(OPTION_REG,6)        INTEDG;
+// BIT_AT(OPTION_REG,5)        T0CS;
+// BIT_AT(OPTION_REG,4)        T0SE;
+// BIT_AT(OPTION_REG,3)        PSA;
+// BIT_AT(OPTION_REG,2)        PS2;
+// BIT_AT(OPTION_REG,1)        PS1;
+// BIT_AT(OPTION_REG,0)        PS0;
 
 // //----- TRISE Bits ---------------------------------------------------------
 
-// BIT_AT(TRISE_ADDR,7)        IBF;
-// BIT_AT(TRISE_ADDR,6)        OBF;
-// BIT_AT(TRISE_ADDR,5)        IBOV;
-// BIT_AT(TRISE_ADDR,4)        PSPMODE;
-// BIT_AT(TRISE_ADDR,2)        TRISE2;
-// BIT_AT(TRISE_ADDR,1)        TRISE1;
-// BIT_AT(TRISE_ADDR,0)        TRISE0;
+// BIT_AT(TRISE,7)        IBF;
+// BIT_AT(TRISE,6)        OBF;
+// BIT_AT(TRISE,5)        IBOV;
+// BIT_AT(TRISE,4)        PSPMODE;
+// BIT_AT(TRISE,2)        TRISE2;
+// BIT_AT(TRISE,1)        TRISE1;
+// BIT_AT(TRISE,0)        TRISE0;
 
 // //----- PIE1 Bits ----------------------------------------------------------
 
-// BIT_AT(PIE1_ADDR,7)        PSPIE;
-// BIT_AT(PIE1_ADDR,6)        ADIE;
-// BIT_AT(PIE1_ADDR,5)        RCIE;
-// BIT_AT(PIE1_ADDR,4)        TXIE;
-// BIT_AT(PIE1_ADDR,3)        SSPIE;
-// BIT_AT(PIE1_ADDR,2)        CCP1IE;
-// BIT_AT(PIE1_ADDR,1)        TMR2IE;
-// BIT_AT(PIE1_ADDR,0)        TMR1IE;
+// BIT_AT(PIE1,7)        PSPIE;
+// BIT_AT(PIE1,6)        ADIE;
+// BIT_AT(PIE1,5)        RCIE;
+// BIT_AT(PIE1,4)        TXIE;
+// BIT_AT(PIE1,3)        SSPIE;
+// BIT_AT(PIE1,2)        CCP1IE;
+// BIT_AT(PIE1,1)        TMR2IE;
+// BIT_AT(PIE1,0)        TMR1IE;
 
 // //----- PIE2 Bits ----------------------------------------------------------
 
-// BIT_AT(PIE2_ADDR,4)        EEIE;
-// BIT_AT(PIE2_ADDR,3)        BCLIE;
-// BIT_AT(PIE2_ADDR,0)        CCP2IE;
+// BIT_AT(PIE2,4)        EEIE;
+// BIT_AT(PIE2,3)        BCLIE;
+// BIT_AT(PIE2,0)        CCP2IE;
 
 // //----- PCON Bits ----------------------------------------------------------
 
-// BIT_AT(PCON_ADDR,1)        NOT_POR;
-// BIT_AT(PCON_ADDR,0)        NOT_BO;
-// BIT_AT(PCON_ADDR,0)        NOT_BOR;
+// BIT_AT(PCON,1)        NOT_POR;
+// BIT_AT(PCON,0)        NOT_BO;
+// BIT_AT(PCON,0)        NOT_BOR;
 
 // //----- SSPCON2 Bits --------------------------------------------------------
 
-// BIT_AT(SSPCON2_ADDR,7)        GCEN;
-// BIT_AT(SSPCON2_ADDR,6)        ACKSTAT;
-// BIT_AT(SSPCON2_ADDR,5)        ACKDT;
-// BIT_AT(SSPCON2_ADDR,4)        ACKEN;
-// BIT_AT(SSPCON2_ADDR,3)        RCEN;
-// BIT_AT(SSPCON2_ADDR,2)        PEN;
-// BIT_AT(SSPCON2_ADDR,1)        RSEN;   
-// BIT_AT(SSPCON2_ADDR,0)        SEN;   
+// BIT_AT(SSPCON2,7)        GCEN;
+// BIT_AT(SSPCON2,6)        ACKSTAT;
+// BIT_AT(SSPCON2,5)        ACKDT;
+// BIT_AT(SSPCON2,4)        ACKEN;
+// BIT_AT(SSPCON2,3)        RCEN;
+// BIT_AT(SSPCON2,2)        PEN;
+// BIT_AT(SSPCON2,1)        RSEN;   
+// BIT_AT(SSPCON2,0)        SEN;   
 
 // //----- SSPSTAT Bits -------------------------------------------------------
 
-// BIT_AT(SSPSTAT_ADDR,7)        SMP;
-// BIT_AT(SSPSTAT_ADDR,6)        CKE;
-// BIT_AT(SSPSTAT_ADDR,5)        D;
-// BIT_AT(SSPSTAT_ADDR,5)        I2C_DATA;
-// BIT_AT(SSPSTAT_ADDR,5)        NOT_A;
-// BIT_AT(SSPSTAT_ADDR,5)        NOT_ADDRESS;
-// BIT_AT(SSPSTAT_ADDR,5)        D_A;
-// BIT_AT(SSPSTAT_ADDR,5)        DATA_ADDRESS;
-// BIT_AT(SSPSTAT_ADDR,4)        P;
-// BIT_AT(SSPSTAT_ADDR,4)        I2C_STOP;
-// BIT_AT(SSPSTAT_ADDR,3)        S;
-// BIT_AT(SSPSTAT_ADDR,3)        I2C_START;
-// BIT_AT(SSPSTAT_ADDR,2)        R;
-// BIT_AT(SSPSTAT_ADDR,2)        I2C_READ;
-// BIT_AT(SSPSTAT_ADDR,2)        NOT_W;
-// BIT_AT(SSPSTAT_ADDR,2)        NOT_WRITE;
-// BIT_AT(SSPSTAT_ADDR,2)        R_W;
-// BIT_AT(SSPSTAT_ADDR,2)        READ_WRITE;
-// BIT_AT(SSPSTAT_ADDR,1)        UA;
-// BIT_AT(SSPSTAT_ADDR,0)        BF;
+// BIT_AT(SSPSTAT,7)        SMP;
+// BIT_AT(SSPSTAT,6)        CKE;
+// BIT_AT(SSPSTAT,5)        D;
+// BIT_AT(SSPSTAT,5)        I2C_DATA;
+// BIT_AT(SSPSTAT,5)        NOT_A;
+// BIT_AT(SSPSTAT,5)        NOTESS;
+// BIT_AT(SSPSTAT,5)        D_A;
+// BIT_AT(SSPSTAT,5)        DATAESS;
+// BIT_AT(SSPSTAT,4)        P;
+// BIT_AT(SSPSTAT,4)        I2C_STOP;
+// BIT_AT(SSPSTAT,3)        S;
+// BIT_AT(SSPSTAT,3)        I2C_START;
+// BIT_AT(SSPSTAT,2)        R;
+// BIT_AT(SSPSTAT,2)        I2C_READ;
+// BIT_AT(SSPSTAT,2)        NOT_W;
+// BIT_AT(SSPSTAT,2)        NOT_WRITE;
+// BIT_AT(SSPSTAT,2)        R_W;
+// BIT_AT(SSPSTAT,2)        READ_WRITE;
+// BIT_AT(SSPSTAT,1)        UA;
+// BIT_AT(SSPSTAT,0)        BF;
 
 // //----- TXSTA Bits ---------------------------------------------------------
 
-// BIT_AT(TXSTA_ADDR,7)        CSRC;
-// BIT_AT(TXSTA_ADDR,6)        TX9;
-// BIT_AT(TXSTA_ADDR,6)        NOT_TX8;    // Backward compatibility only
-// BIT_AT(TXSTA_ADDR,6)        TX8_9;    // Backward compatibility only
-// BIT_AT(TXSTA_ADDR,5)        TXEN;
-// BIT_AT(TXSTA_ADDR,4)        SYNC;
-// BIT_AT(TXSTA_ADDR,2)        BRGH;
-// BIT_AT(TXSTA_ADDR,1)        TRMT;
-// BIT_AT(TXSTA_ADDR,0)        TX9D;
-// BIT_AT(TXSTA_ADDR,0)        TXD8;    // Backward compatibility only
+// BIT_AT(TXSTA,7)        CSRC;
+// BIT_AT(TXSTA,6)        TX9;
+// BIT_AT(TXSTA,6)        NOT_TX8;    // Backward compatibility only
+// BIT_AT(TXSTA,6)        TX8_9;    // Backward compatibility only
+// BIT_AT(TXSTA,5)        TXEN;
+// BIT_AT(TXSTA,4)        SYNC;
+// BIT_AT(TXSTA,2)        BRGH;
+// BIT_AT(TXSTA,1)        TRMT;
+// BIT_AT(TXSTA,0)        TX9D;
+// BIT_AT(TXSTA,0)        TXD8;    // Backward compatibility only
 
 // //----- ADCON1 Bits --------------------------------------------------------
 
-// BIT_AT(ADCON1_ADDR,7)        ADFM;
-// BIT_AT(ADCON1_ADDR,3)        PCFG3;
-// BIT_AT(ADCON1_ADDR,2)        PCFG2;
-// BIT_AT(ADCON1_ADDR,1)        PCFG1;
-// BIT_AT(ADCON1_ADDR,0)        PCFG0;
+// BIT_AT(ADCON1,7)        ADFM;
+// BIT_AT(ADCON1,3)        PCFG3;
+// BIT_AT(ADCON1,2)        PCFG2;
+// BIT_AT(ADCON1,1)        PCFG1;
+// BIT_AT(ADCON1,0)        PCFG0;
 
 // //----- EECON1 Bits --------------------------------------------------------
 
-// BIT_AT(EECON1_ADDR,7)        EEPGD;
-// BIT_AT(EECON1_ADDR,3)        WRERR;
-// BIT_AT(EECON1_ADDR,2)        WREN;
-// BIT_AT(EECON1_ADDR,1)        WR;
-// BIT_AT(EECON1_ADDR,0)        RD;
+// BIT_AT(EECON1,7)        EEPGD;
+// BIT_AT(EECON1,3)        WRERR;
+// BIT_AT(EECON1,2)        WREN;
+// BIT_AT(EECON1,1)        WR;
+// BIT_AT(EECON1,0)        RD;
 
 //==========================================================================
 //
