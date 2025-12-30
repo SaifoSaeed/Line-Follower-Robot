@@ -7,13 +7,15 @@
 #define _S_RIGHT     0x07
 #define _S_PARK      0x08
 
-#define S_LEFT       _S_LEFT | ~_S_MID | ~_S_RIGHT | ~_S_PARK 
-#define S_RIGHT     ~_S_LEFT | ~_S_MID |  _S_RIGHT | ~_S_PARK 
+#define S_LEFT       _S_LEFT | ~_S_RIGHT | ~_S_PARK 
+#define S_RIGHT     ~_S_LEFT |  _S_RIGHT | ~_S_PARK 
 #define S_MID       ~_S_LEFT |  _S_MID | ~_S_RIGHT | ~_S_PARK
 
 #define S_INT       _S_LEFT | _S_MID | _S_RIGHT | ~_S_PARK
 #define S_WHITE    ~_S_LEFT | ~_S_MID | ~_S_RIGHT| ~_S_PARK
 #define S_BLACK     _S_LEFT | _S_MID | _S_RIGHT |  _S_PARK
+
+
 #define INIT_DELAY  3000
 
 //Function Declarations.
@@ -105,7 +107,7 @@ void interrupt(){
         INTCON &= 0xFD;  //Clear TMR0IF.
     }
     else {
-        INTCON &= 0x80;
+        INTCON &= 0x80; 
     }
 
     return;
@@ -113,7 +115,12 @@ void interrupt(){
 
 //Initialize Registers.
 void setup(){
-    TRISA = 0x01;
+    
+    // TRISA = 0x01; //Ultrasonic
+    // ADCON0 = 0x01;
+    // ADCON0 = 0x01;
+    // ADCON1 = 0x0E;
+
     TRISC = 0x00;
     TRISD = 0xF0;
     PORTA = PORTB = PORTC = PORTD = PORTE = 0x00;
@@ -128,6 +135,12 @@ void setup(){
     PIE2 = 0x00;
     // PIR2
 
+    T2CON = 0x6F; // 0.1ms per count
+    CCP1CON = CCP2CON = 0x0C; // Enable PWM for both motors
+    PR2 = 99; // SO 100*0.1ms = 10ms period
+    CCPR1L = 49; // WILL BE CHANGED DUE TO MOTORS SHIT
+    CCPR2L = 49; //
+
     return;
 }
 
@@ -137,6 +150,10 @@ int main(){
     while(1){
         if (FINISH){
             asm SLEEP;
+        }
+
+        else{
+            
         }
     }
     
@@ -157,7 +174,7 @@ int main(){
         Motor PWM Right (H-bridge EnableA)    ->  RC1
         Motor PWM Left  (H-bridge EnableB)    ->  RC2
     */    
-
+    //servo motor for flag -> RD1
     //Servo Motor   ->  RD2
     //2 LEDs        ->  RD3 (we will try to put both LEDs in the same node ~100ohm)
     //4 IR sensors  ->  RD4-7
