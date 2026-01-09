@@ -2,18 +2,14 @@
 
 #define _SERVO       0x03
 #define _LED         0x04
-#define _S_LEFT      0x05
-#define _S_MID       0x06
-#define _S_RIGHT     0x07
-#define _S_PARK      0x08
+#define _S_PARK      ~0x80
+#define _S_LEFT      0x40
+#define _S_MID       0x20
+#define _S_RIGHT     0x10
 
-#define S_LEFT       _S_LEFT | ~_S_RIGHT | ~_S_PARK 
-#define S_RIGHT     ~_S_LEFT |  _S_RIGHT | ~_S_PARK 
-#define S_MID       ~_S_LEFT |  _S_MID | ~_S_RIGHT | ~_S_PARK
-
-#define S_INT       _S_LEFT | _S_MID | _S_RIGHT | ~_S_PARK
-#define S_WHITE    ~_S_LEFT | ~_S_MID | ~_S_RIGHT| ~_S_PARK
-#define S_BLACK     _S_LEFT | _S_MID | _S_RIGHT |  _S_PARK
+#define S_INT       _S_LEFT  | _S_RIGHT //0b0101 0000
+#define S_WHITE     ~(_S_LEFT  | _S_RIGHT | _S_MID)
+#define S_BLACK     ~(S_WHITE) | _S_PARK
 
 
 #define INIT_DELAY  3000
@@ -117,9 +113,9 @@ void interrupt(){
 void setup(){
     
     // TRISA = 0x01; //Ultrasonic
-    // ADCON0 = 0x01;
-    // ADCON0 = 0x01;
-    // ADCON1 = 0x0E;
+    ADCON0 = 0x01;
+    ADCON0 = 0x01;
+    ADCON1 = 0x0E;
 
     TRISC = 0x00;
     TRISD = 0xF0;
@@ -138,8 +134,10 @@ void setup(){
     T2CON = 0x6F; // 0.1ms per count
     CCP1CON = CCP2CON = 0x0C; // Enable PWM for both motors
     PR2 = 99; // SO 100*0.1ms = 10ms period
-    CCPR1L = 49; // WILL BE CHANGED DUE TO MOTORS SHIT
-    CCPR2L = 49; //
+    CCPR1L = 7; // WILL BE CHANGED DUE TO MOTORS SHIT
+    CCPR2L = 9; //
+
+    
 
     return;
 }
@@ -174,9 +172,10 @@ int main(){
         Motor PWM Right (H-bridge EnableA)    ->  RC1
         Motor PWM Left  (H-bridge EnableB)    ->  RC2
     */    
-    //servo motor for flag -> RD1
-    //Servo Motor   ->  RD2
-    //2 LEDs        ->  RD3 (we will try to put both LEDs in the same node ~100ohm)
+    //Servoflag     ->  RD0
+    //Buzzer        ->  RD1
+    //LED           ->  RD2
+    //LED           ->  RD3 
     //4 IR sensors  ->  RD4-7
     return 0;
 }

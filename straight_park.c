@@ -1,144 +1,210 @@
-    // #include "pinout.h"
+//LDR IS HIGH WHEN DARK
 
-    #define _SERVO       0x03
-    #define _LED         0x08
-    #define _S_LEFT      0x40
-    #define _S_MID       0x20
-    #define _S_RIGHT     0x10
-    #define _S_PARK      0x80
+// --- 1. SENSOR DEFINITIONS (Simple Masks) ---
+#define LDR         0x01  // RA0 (0000 0001)
 
-    #define S_LEFT       _S_LEFT | ~_S_RIGHT | ~_S_PARK 
-    #define S_RIGHT     ~_S_LEFT |  _S_RIGHT | ~_S_PARK 
-    #define S_MID       ~_S_LEFT |  _S_MID | ~_S_RIGHT | ~_S_PARK
+#define SERVO       0x01  // RD0 (0000 0001)
+#define BUZZER      0x02  // RD1 (0000 0010)
+#define _LED_1      0x04  // RD2 (0000 0100)
+#define _LED_2      0x08  // RD3 (0000 1000)
+#define S_LEFT      0x40  // RD6 (0100 0000)
+#define S_MID       0x20  // RD5 (0010 0000)
+#define S_RIGHT     0x10  // RD4 (0001 0000)
+#define S_LR        S_LEFT | S_RIGHT
+#define S_PARK      0x80
 
-    #define S_INT       _S_LEFT | _S_MID | _S_RIGHT | ~_S_PARK
-    #define S_WHITE    ~_S_LEFT | ~_S_MID | ~_S_RIGHT| ~_S_PARK
-    #define S_BLACK     _S_LEFT | _S_MID | _S_RIGHT 
+// --- 2. MOTOR DIRECTION DEFINITIONS ---
+// To go FWD: RC3=1, RC4=0.  (0000 1000 -> 0x08)
+// To go REV: RC3=0, RC4=1.  (0001 0000 -> 0x10)
+#define DIR_FWD      0x08
+#define DIR_REV      0x10
+#define DIR_STOP     0x00
 
-    #define BW_FWD      0x06
+// --- 3. SPEED SETTINGS (0 to 255) ---
+// Adjust these based on how fast your robot is!
+#define SPEED_FAST   125   // Base running speed
+#define SPEED_SLOW   100   // Turning inner wheel speed
+#define SPEED_VERY_SLOW   50   // Turning inner wheel speed
+#define SPEED_STOP   0     // Stop
+#define DIFF_13      33    // ~13% of 255
 
-    #define INIT_DELAY  3000
+volatile unsigned int delay_tick = 0;
+volatile unsigned int buzz_tick = 0;
+#define INIT_DELAY  3000
+unsigned char DELAY_PASSED = 0;
+volatile unsigned char FINISHED = 0;
+volatile unsigned char BUZZING = 0;
 
-    //Function Declarations.
-    void interrupt();
-    void setup();
-    void myDelay(unsigned int);
+void interrupt();
+void setup();
+unsigned int ADC_Read(void);
+void usDelay(unsigned int us);
 
-    unsigned char DELAY_PASSED = 0;
-    unsigned char FINISH = 0;
-    volatile unsigned int tick = 0;
+void usDelay(unsigned int us) {
+    unsigned int i;
 
-    unsigned char period;
-    unsigned char duty;
+    for(i = 0; i < us; i++) {
+        asm nop; // Fine-tuning
+    }
+}
 
-    unsigned int Mcntr;
+  unsigned int ADC_Read(){
+    ADCON0 |=  0x04;
+    while(ADCON0 & 0x04);
+    return ((ADRESH << 8) | ADRESL);
+  }
 
-    void PWM_Wheels(unsigned int p, unsigned int d){
-        // period in milliseconds, d 1-100 %
-        //This will have the PWM Signal Out on PORTB1-7, so do the necessary initializations in the main.
-        period=p;//milliseconds
-        duty=(d*p)/100;
-        PORTC |= BW_FWD;
-        myDelay(duty);
-        PORTC &= ~BW_FWD;
-        myDelay(period-duty);
+  void interrupt(){
+    //We assume that only TMR0 can trigger interrupts for now.
+
+    if (!DELAY_PASSED){
+        delay_tick++;
+        INTCON &= 0xA0;
+        if ( delay_tick > INIT_DELAY ){
+            PORTD |= _LED_1;
+            PORTD |= _LED_2;
+            DELAY_PASSED = ~DELAY_PASSED;
+            INTCON &= 0xA0;
+        }
     }
 
-    void myDelay(unsigned int x){
-        Mcntr=0;
-        while(Mcntr<x);
+    if (BUZZING){
+        buzz_tick++;
     }
 
-    //Interrupt Service Routine.
-    void interrupt(){
-        //We assume that only TMR0 can trigger interrupts for now.
+    else if ( !(PORTD & S_LEFT) && !(PORTD & S_RIGHT) && !(PORTD & S_MID) && (PORTD & S_PARK)){
+        CCPR2L = SPEED_STOP;
+        CCPR1L = SPEED_STOP;
+        FINISHED = 1;
+        INTCON &= 0xA0;
+    }
+    
+    else {
+        INTCON &= 0xA0;
+    }
+  }
 
-        if (~DELAY_PASSED){
-            tick++;
-            if ( tick > INIT_DELAY ){
-                PORTD |= _LED;
-                DELAY_PASSED = ~DELAY_PASSED;
+  void setup() {
+      // --- GPIO CONFIG ---
+      TRISA = 0x01;
+      TRISC = 0x00;   // PORTC is all Output (Motors)
+      TRISD = 0xF0;   // PORTD upper nibble is Input (Sensors)
+
+      PORTA = PORTB = PORTC = PORTD = PORTE = 0x00;   // Everything OFF initially
+
+      // TIMERS Configuration
+      TMR0 = TMR1H = TMR1L = TMR2 = 0;
+      OPTION_REG = 0x02;      //TMR0 1ms overflow
+      INTCON = 0xA0;
+
+      PIE1 = 0x00;
+      // PIR1
+
+      PIE2 = 0x00;
+      // PIR2
+
+      // --- PWM CONFIGURATION (The "Hard" Way) ---
+      // We use Timer2 for both CCP1 and CCP2
+
+      // 1. Set PWM Period (Frequency)
+      // PR2 = [Fosc / (4 * TMR2Prescale * Freq)] - 1
+      // For ~2kHz at 8MHz:
+      PR2 = 0xFF;
+
+      // 2. Configure CCP Modules to PWM Mode
+      // CCPxCON <3:0> bits set to 1100 (0x0C) for PWM
+      CCP1CON = 0x0C; // Enable PWM on RC2
+      CCP2CON = 0x0C; // Enable PWM on RC1
+
+      // 3. Set Initial Duty Cycle to 0 (Stopped)
+      CCPR1L = 0;
+      CCPR2L = 0;
+
+      // 4. Configure Timer2
+      // T2CON: Prescaler 1:16, Timer ON
+      // Bit 2 = 1 (TMR2ON), Bits 1-0 = 1x (Prescaler 16) -> 0000 0111 -> 0x07 (actually 0x04 is 1:1, let's use 1:4 for smoother motor)
+      // Let's use T2CON = 0x04 (Timer2 On, Prescaler 1:1) for high freq,
+      // Or T2CON = 0x06 (Timer2 On, Prescaler 1:16) for lower freq torque.
+      T2CON = 0x06; // Turn on Timer2
+
+      ADCON0 = 0x01; // ADON = 1 , fosc/4 , AN0
+      ADCON1 = 0xAE; // right.jusified , ALL digital except AN0
+  }
+
+  void main() {
+      unsigned int reading;
+      unsigned int voltage;
+      setup();
+
+      //Initial delay.
+      while (delay_tick < INIT_DELAY);
+
+      //Direction -> FWD
+      PORTC = (PORTC & 0xE7) | DIR_FWD;
+
+      while(1) {
+          reading = ADC_Read();
+
+          //Scaled 10 times.
+          voltage = (reading * 50) / 1023;
+
+        //Movement Scope.
+        {    
+
+            if (~PORTD & S_LEFT) {
+                CCPR2L = SPEED_SLOW;
+                CCPR1L = SPEED_STOP;
+            }
+
+            else if (~PORTD & S_RIGHT) {
+                CCPR2L = SPEED_STOP;
+                CCPR1L = SPEED_SLOW - DIFF_13;
+            }
+
+            // else if (~PORTD & S_MID) {
+            //     CCPR2L = SPEED_FAST;
+            //     CCPR1L = SPEED_FAST - DIFF_13;
+            // }
+
+            // else {
+            //     CCPR2L = SPEED_STOP;
+            //     CCPR1L = SPEED_STOP;
+            // }
+
+            else {
+                CCPR2L = SPEED_FAST;
+                CCPR1L = SPEED_FAST - DIFF_13;
             }
         }
 
-        //Follow line. Straight
-        else if ( PORTD & S_MID ) {  //Ultrasonic ?! because we want to slow down...
-            PWM_Wheels(10,10);
-        }
+        //Buzzer Scope.
+        {
+            //Beeping?
+            if (voltage >= 35) {
+                BUZZING = 1;
+                while(buzz_tick < 300) {
+                    PORTD |= BUZZER;
+                }
+                
+                    while(buzz_tick < 300) {
+                    PORTD &= ~BUZZER;   
+                }
+            }
 
-        //Park.
-        else if ( PORTD & S_BLACK ) {
-            FINISH = 1;
-            PWM_Wheels(10,0);
-            PORTD &= ~_LED; //Turn off LEDs.
-            //Activate flag.
-        }
-
-        if (~FINISH){
-            INTCON &= 0xFB;  //Clear TMR0IF.
-        }
-        else {
-            INTCON &= 0x80; 
-        }
-
-        return;
-    }
-
-    //Initialize Registers.
-    void setup(){
-        
-        // TRISA = 0x01; //Ultrasonic
-        // ADCON0 = 0x01;
-        // ADCON0 = 0x01;
-        // ADCON1 = 0x0E;
-
-        TRISC = 0x00;
-        TRISD = 0xF0;
-        PORTA = PORTB = PORTC = PORTD = PORTE = 0x00;
-
-        TMR0 = TMR1H = TMR1L = TMR2 = 0;   
-        OPTION_REG = 0x02;      //TMR0 1ms overflow
-        INTCON = 0xA0;
-        
-        PIE1 = 0x00;
-        // PIR1
-        
-        PIE2 = 0x00;
-        // PIR2
-
-        return;
-    }
-
-    int main(){
-        setup();
-        while (tick < INIT_DELAY);
-        PORTC = 0x08;
-        while(1){
-            if (FINISH){
-                asm SLEEP;
+            else {
+                BUZZING = 0;
+                PORTD &= ~BUZZER;
             }
         }
-        
 
-        //How to follow the line?!
+        // if (FINISHED){
+        //     INTCON &= 0x00;
+        //     PORTD |= 0x01;  // High
+        //     usDelay(1500);  // 1.5ms delay for 90 degrees
+        //     PORTD  = 0x00;  // Low
+        //     usDelay(18500); // 18.5ms delay (rest of 20ms)
+        //     asm sleep; 
+        // }
 
-        //Ultrasonic    ->  RA0 
-
-        /*
-        They must have the same direction!
-            H-Bridge in1/in3 -> RC3  
-            H-Bridge in2/in4 -> RC4
-        */
-
-        /*
-        TMR2 controls CCP1 and CCP2 -> Necessitates that both wheels always move at the same speed.
-        Another approach is to use TMR1 for Wheel1 and TMR2 for Wheel2 -> Limits us with only one TMR0 for program flow.
-            Motor PWM Right (H-bridge EnableA)    ->  RC1
-            Motor PWM Left  (H-bridge EnableB)    ->  RC2
-        */    
-        //servo motor for flag -> RD1
-        //Servo Motor   ->  RD2
-        //2 LEDs        ->  RD3 (we will try to put both LEDs in the same node ~100ohm)
-        //4 IR sensors  ->  RD4-7
-        return 0;
-    }
+      }
+  }

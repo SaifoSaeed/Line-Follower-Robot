@@ -1,15 +1,15 @@
 Project:
     What's next?:
-        ☐ Understand CCP1/2.
+        ✔ Understand CCP1/2. @done (1/6/2026, 10:14:33 PM)
         ☐ How to utilize TMR1, TM2.
-        ☐ Soldering of critical jumpers.
-        ☐ Ultrasonic sensor -> ADC configuration.
-        ☐ 9V battery?
-        ☐ Glue breadboard/batteries/other stuff on car bed.
-        ☐ Set up (real_life) testing env.
-        ☐ What if obstacle?!
-        ☐ Understand Bump and Parking...
-        ☐ Tweaking...
+        ✔ Soldering of critical jumpers. @done (1/6/2026, 10:14:29 PM)
+        ✘ Ultrasonic sensor -> ADC configuration. @cancelled (1/6/2026, 10:14:27 PM)
+        ✔ 9V battery? @done (1/6/2026, 10:14:25 PM)
+        ✔ Glue breadboard/batteries/other stuff on car bed. @done (1/6/2026, 10:14:34 PM)
+        ✔ Set up (real_life) testing env. @done (1/6/2026, 10:14:36 PM)
+        ✔ What if obstacle?! @done (1/6/2026, 10:14:38 PM)
+        ✔ Understand Bump and Parking... @done (1/6/2026, 10:14:40 PM)
+        ✔ Tweaking... @done (1/6/2026, 10:14:44 PM)
 
     In Embedded Lab:
         ✔ Figure out board PSU. @done (12/17/2025, 6:39:27 PM)
@@ -20,13 +20,13 @@ Project:
         Ultrasonic:
             ☐ If the ultrasonic sensor has a 30deg angle, what does it read?
             ☐ Ranged up or down?
-            ☐ How high is the bump? How long? Are we expected to slow down or speed up?
-        ☐ Where is the flag when we park?
+            ✔ How high is the bump? How long? Are we expected to slow down or speed up? @done (1/6/2026, 10:14:51 PM)
+        ✔ Where is the flag when we park? @done (1/6/2026, 10:14:56 PM)
     Power On:
-        ☐ Check MCLR
-        ☐ Oscillator working?
-        ☐ Power connections.
-        ☐ Watchdog timer!
+        ✔ Check MCLR @done (1/6/2026, 10:14:58 PM)
+        ✔ Oscillator working? @done (1/6/2026, 10:14:59 PM)
+        ✔ Power connections. @done (1/6/2026, 10:15:00 PM)
+        ✔ Watchdog timer! @done (1/6/2026, 10:15:01 PM)
     
     Components:
             ✔ Database. @done (12/4/2025, 7:18:07 PM)
