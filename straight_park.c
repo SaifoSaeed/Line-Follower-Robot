@@ -1,15 +1,17 @@
 //LDR IS HIGH WHEN DARK
 
 // --- 1. SENSOR DEFINITIONS (Simple Masks) ---
-#define LDR         0x01  // RA0 (0000 0001)
+#define LDR         0x01  //RA0 (0000 0001)
 
-#define SERVO       0x01  // RD0 (0000 0001)
-#define BUZZER      0x02  // RD1 (0000 0010)
-#define _LED_1      0x04  // RD2 (0000 0100)
-#define _LED_2      0x08  // RD3 (0000 1000)
-#define S_LEFT      0x40  // RD6 (0100 0000)
-#define S_MID       0x20  // RD5 (0010 0000)
-#define S_RIGHT     0x10  // RD4 (0001 0000)
+#define S_WALL      0x80  //RB7 (1000 0000)
+
+#define SERVO       0x01  //RD0 (0000 0001)
+#define BUZZER      0x02  //RD1 (0000 0010)
+#define _LED_1      0x04  //RD2 (0000 0100)
+#define _LED_2      0x08  //RD3 (0000 1000)
+#define S_LEFT      0x40  //RD6 (0100 0000)
+#define S_MID       0x20  //RD5 (0010 0000)
+#define S_RIGHT     0x10  //RD4 (0001 0000)
 #define S_LR        S_LEFT | S_RIGHT
 #define S_PARK      0x80
 
@@ -70,6 +72,7 @@ void usDelay(unsigned int us) {
 
     if (BUZZING){
         buzz_tick++;
+        INTCON &= 0xA0;
     }
 
     else if ( !(PORTD & S_LEFT) && !(PORTD & S_RIGHT) && !(PORTD & S_MID) && (PORTD & S_PARK)){
@@ -182,17 +185,20 @@ void usDelay(unsigned int us) {
             //Beeping?
             if (voltage >= 35) {
                 BUZZING = 1;
-                while(buzz_tick < 300) {
+                while(buzz_tick < 500) {
                     PORTD |= BUZZER;
                 }
                 
-                    while(buzz_tick < 300) {
+                buzz_tick = 0;
+                while(buzz_tick < 500) {
                     PORTD &= ~BUZZER;   
                 }
+                buzz_tick = 0;
             }
 
             else {
                 BUZZING = 0;
+                buzz_tick = 0;
                 PORTD &= ~BUZZER;
             }
         }
