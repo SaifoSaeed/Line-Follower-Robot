@@ -142,13 +142,13 @@
              INTCON &= 0xFB;
          
         // Black area routine...
-         else if ( (ULTRA_ON & BUMP) & (~PORTD & S_LEFT) & (~PORTD & S_RIGHT) & (~PORTD & S_MID) ){
-             CCPR2L = SPEED_STOP;
-             CCPR1L = SPEED_STOP;
-             FINISHED = 1;
-             INTCON &= 0xFB;  //=> should we re-enable interrupts?
-             //Flag!!         => in main()
-         }
+        // else if ( (ULTRA_ON & BUMP) & (~PORTD & S_LEFT) & (~PORTD & S_RIGHT) & (~PORTD & S_MID) ){
+        //     CCPR2L = SPEED_STOP;
+        //     CCPR1L = SPEED_STOP;
+        //     FINISHED = 1;
+        //     INTCON &= 0xFB;  //=> should we re-enable interrupts?
+        //     //Flag!!         => in main()
+        // }
 
         else {
             INTCON &= 0xFB;
@@ -264,17 +264,20 @@
                              
                             CCPR2L = SPEED_SLOW;
                             CCPR1L = SPEED_SLOW - DIFF;
-                            Micro_Delay(25000);
-                            Micro_Delay(25000);
+                            Micro_Delay(50000);
+                            Micro_Delay(50000);
                     
                             CCPR2L = SPEED_STOP;
                             CCPR1L = SPEED_FAST - DIFF;
                             
-                            Micro_Delay(25000);
-                            Micro_Delay(25000);
+                            Micro_Delay(50000);
+                            Micro_Delay(50000);
 
                             CCPR2L = SPEED_STOP;
                             CCPR1L = SPEED_STOP;
+                            PORTD &= ~(_LED_1 | _LED_2);
+
+                            asm sleep;
                         }
 
                         else if (~PORTD & S_LEFT) {
@@ -367,61 +370,7 @@
                     //Only when ULTRA_ON == 0x03 do we infer that
                     //it has entered then exited the tunnel.
                 }
-             if ( !FINISHED ) {
+            }      
+            
                 
-             }
-            // //Parking subroutine.
-             else {
-                
-            //     // PHASE 1: Buzz ON (0 to 500ms)
-            //     if (park_state == PARK_BUZZ_ON) {
-            //         PORTD |= BUZZER; // Turn Buzzer ON
-                    
-            //         // Check if 500ms has passed
-            //         if (delay_tick >= 500) {
-            //             PORTD &= ~BUZZER; // Turn OFF
-            //             delay_tick = 0;   // Reset Timer
-            //             park_state = PARK_BUZZ_OFF;
-            //         }
-            //     }
-                
-            //     // PHASE 2: Buzz OFF (Wait another 500ms)
-            //     else if (park_state == PARK_BUZZ_OFF) {
-            //         // Buzzer is already OFF, just waiting...
-            //         if (delay_tick >= 500) {
-            //             delay_tick = 0;
-            //             park_state = PARK_ACTION; // Move to next phase
-            //         }
-            //     }
-                
-            //     // PHASE 3: Servo + Turn Right + Sleep?
-            //     else if (park_state == PARK_ACTION) {
-                    
-            //         // 1. Set Motors (Turn Right Slowly).
-            //         CCPR2L = 0;          // Right Motor Stop
-            //         CCPR1L = SPEED_SLOW - DIFF; // Left Motor Forward
-                    
-            //         // 2. Servo Non-Blocking Update (Every 20ms)
-            //         // We use the difference in time to create the 20ms period
-            //         if (delay_tick - servo_timer >= 20) {
-            //             servo_timer = delay_tick; // Update timestamp
-                        
-            //             // Pulse High (2ms) - We block briefly here for precision
-            //             PORTD |= 0x01;  
-            //             Micro_Delay(2000);
-                        
-            //             // Pulse Low - We DO NOT block here! 
-            //             PORTD &= ~0x01; 
-            //             // We just let the main loop continue running during the 18ms gap
-            //         }
-                    
-            //         // Optional: Stop everything after some time?
-            //         if (delay_tick > 500) { // After 5 seconds of turning
-            //             CCPR2L = 0;
-            //             CCPR1L = 0;
-            //             // asm sleep; // Only sleep if you want the robot to die completely
-            //         }
-            //     }
-            }
-    }
-}
+             

@@ -57,17 +57,17 @@ void read_sonar(void){
     TMR1H=0;
     TMR1L=0;
 
-    PORTB |= 0x04;//Trigger the ultrasonic sensor (RB2 connected to trigger)
-    usDelay(10);//keep trigger for 10uS
-    PORTB &= 0xFB;//Remove trigger
+    PORTB |= 0x04; //Trigger the ultrasonic sensor (RB2 connected to trigger)
+    usDelay(10);   //keep trigger for 10uS
+    PORTB &= 0xFB; //Remove trigger
 
     while(!(PORTB&0x02));
 
-    T1CON=0x19;//TMR1 ON,  Fosc/4 (inc 1uS) with 1:2 prescaler (TMR1 overflow after 0xFFFF counts ==65536)==> 65.536ms
+    T1CON=0x19; //TMR1 ON,  Fosc/4 (inc 1uS) with 1:2 prescaler (TMR1 overflow after 0xFFFF counts ==65536)==> 65.536ms
    
     while(PORTB&0x02);
 
-    T1CON=0x18;//TMR1 OFF,  Fosc/4 (inc 1uS) with 1:1 prescaler (TMR1 overflow after 0xFFFF counts ==65536)==> 65.536ms
+    T1CON=0x18; //TMR1 OFF,  Fosc/4 (inc 1uS) with 1:1 prescaler (TMR1 overflow after 0xFFFF counts ==65536)==> 65.536ms
     T1counts=((TMR1H<<8)|TMR1L)+(T1overflow*65536);
     Distance=((T1counts*34)/(1000))/2;
 }
